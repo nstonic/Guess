@@ -58,7 +58,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--sowpods',
                         default='sowpods.txt',
-                        help='The name of the word file located in the sowpods folder')
+                        help='The name of the word file located in the sowpods folder. Default - sowpods.txt')
     parser.add_argument('--attempts',
                         type=int,
                         default=6,
