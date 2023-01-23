@@ -8,11 +8,8 @@ os.chdir(os.path.dirname(__file__))
 
 
 def get_rand_word(filename):
-    with open(filename, encoding='utf-8') as f:
-        x = choice([x.strip() for x in f]).lower()
-        print(x)
-        return x
-
+    with open(filename, 'r') as f:
+        return choice([x.strip() for x in f]).lower()
 
 
 def print_game(wrong, word, letters):
@@ -69,5 +66,5 @@ def play(word):
 
 
 if __name__ == "__main__":
-    word = get_rand_word(os.path.join('sowpods', FILENAME))
+    word = get_rand_word(os.path.join('data', FILENAME))
     play(word)
