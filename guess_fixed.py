@@ -3,6 +3,7 @@ import random
 from string import ascii_lowercase
 
 import argparse
+from typing import Optional
 
 
 def get_rand_word(filename: str) -> str:
@@ -14,11 +15,11 @@ def get_rand_word(filename: str) -> str:
 def print_turn(target_word: str, guessed_letters: list, wrong_guesses: list):
     print('\nWrong guess:', ', '.join(wrong_guesses))
     print(' '.join([letter if letter else ' ' for letter in guessed_letters]))
-    masked_word = [character if character == ' ' else '-' for character in target_word]
+    masked_word = [char if char == ' ' else '-' for char in target_word]
     print(' '.join(masked_word))
 
 
-def get_letter(attempts: int, previous_guesses: list) -> str:
+def get_letter(attempts: int, previous_guesses: list) -> Optional[str]:
     user_guess = input(f'> Guess a letter ({attempts} attempts left): ').lower()
     if len(user_guess) != 1 or user_guess not in ascii_lowercase:
         print("> Please input a letter!")
@@ -31,20 +32,20 @@ def get_letter(attempts: int, previous_guesses: list) -> str:
 def play_the_game(target_word: str, attempts: int):
     previous_guesses = []
     wrong_guesses = []
-    guessed_letters = [letter if letter == ' ' else None for letter in target_word]
-    while attempts > 0:
+    guessed_letters = [char if char == ' ' else None for char in target_word]
+    while attempts:
         print_turn(target_word, guessed_letters, wrong_guesses)
         if None not in guessed_letters:
             print('> You win!')
             break
-        user_letter = get_letter(attempts, previous_guesses)
-        if user_letter is not None:
+        user_guess = get_letter(attempts, previous_guesses)
+        if user_guess is not None:
             for index, letter in enumerate(target_word):
-                if user_letter == letter:
-                    guessed_letters[index] = user_letter
-            previous_guesses.append(user_letter)
-            if user_letter not in guessed_letters:
-                wrong_guesses.append(user_letter)
+                if user_guess == letter:
+                    guessed_letters[index] = user_guess
+            previous_guesses.append(user_guess)
+            if user_guess not in guessed_letters:
+                wrong_guesses.append(user_guess)
                 attempts -= 1
 
     else:
