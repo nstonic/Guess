@@ -39,7 +39,7 @@ def play_the_game(target_word: str, attempts: int):
             print('> You win!')
             break
         user_guess = get_letter(attempts, previous_guesses)
-        if user_guess is not None:
+        if user_guess:
             for index, letter in enumerate(target_word):
                 if user_guess == letter:
                     guessed_letters[index] = user_guess
